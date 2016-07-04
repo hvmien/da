@@ -1,0 +1,269 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width" />
+    <title> Quan ly nha hang Buffe </title>
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="Content/css/bootstrap.min.css" type='text/css'>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="Content/css/font-awesome.min.css" type='text/css'>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="Content/css/owl.carousel.css" type='text/css'>
+    <link rel="stylesheet" href="Content/css/style.css" type='text/css'>
+    <link rel="stylesheet" href="css/responsive.css" type='text/css'>
+    <link href="Content/css/style1.css" rel="stylesheet" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="script.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
+</head>
+<script type="text/javascript">
+    function checkSearch() {
+        var key = document.getElementById("key");
+        if (key.value == null || key.value == "") {
+            key.focus();
+            return (false);
+        }
+        return (true);
+    }
+</script>
+<script>
+    function AddToCart(ID) {
+        $.ajax({
+            type: 'POST',
+            url: '/Cart/Add',
+            data: { _cIDSanPham: ID },
+            success: function (data) {
+                $("#totalCount").html(data.totalCount);
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#loginLink").click(function (event) {
+            event.preventDefault();
+            $(".overlay").fadeToggle("fast");
+        });
+
+        $(".overlayLink").click(function (event) {
+            event.preventDefault();
+            var action = $(this).attr('data-action');
+
+            $.get("ajax/" + action, function (data) {
+                $(".login-content").html(data);
+            });
+
+            $(".overlay").fadeToggle("fast");
+        });
+
+        $(".close").click(function () {
+            $(".overlay").fadeToggle("fast");
+        });
+
+        $(document).keyup(function (e) {
+            if (e.keyCode == 27 && $(".overlay").css("display") != "none") {
+                event.preventDefault();
+                $(".overlay").fadeToggle("fast");
+            }
+        });
+    });
+
+</script>
+<script language="javascript">
+    $(document).ready(function () {
+        $('.abc').click(function () {
+
+        })
+    });
+</script>
+
+
+<body>
+    <div ng-app="ungdungAngularJS" ng-controller="cartController" >
+	<div ng-include="'pages/Header.html'">  </div>
+    <div ng-include="'pages/MainMenu.html'">  </div>
+<style type="text/css">
+    td {
+        height: 50px;
+    }
+</style>
+<div class="single-product-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="product-content-right">
+                    <div class="woocommerce">
+                    <h2 style="padding-left: 3cm"> Chi tiết mua hàng </h2>
+                    <table cellspacing="0" class="shop_table cart">
+                                <thead>
+                                    <tr>
+                                        <th class="product-thumbnail">&nbsp;</th>
+                                        <th class="product-name">Sản phẩm</th>
+                                        <th class="product-price">Giá</th>
+                                        <th class="product-quantity">Số lượng</th>
+                                    </tr>
+                                </thead>
+                               
+                                <div >
+                              
+
+                                     <tr class="cart_item" ng-repeat="sanpham in listsanpham">
+                                            <td class="product-thumbnail">
+                                                <a href="DetailSP?qID={{sanpham.id}}"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="Content/img/{{sanpham.img}}"></a>
+                                            </td>
+
+                                            <td class="product-name">
+                                                <a href="DetailSP?qID={{sanpham.id}}">{{sanpham.ten}}</a>
+                                            </td>
+
+                                            <td class="product-price">
+                                                <span class="amount" id = "{{sanpham.id}}">{{sanpham.gia}}</span>
+                                            </td>
+                                            
+                                            <td class="product-quantity">
+
+                                                    <div class="quantity buttons_added">
+                                                        <input type ="hidden" name ="cartItemID" value = "{{sanpham.id}}" >
+                                                        <input type="hidden" id = "{{sanpham.id}}" name="nCount" size="4" class="input-text qty text textchange" value="{{sanpham.soluong}}" min="1" step="1">
+                                                        <span>{{sanpham.soluong}}</span>
+
+                                                    </div>
+                                                </td>
+                                        </tr>
+                                 </div>
+                                        <tr>
+                                        <td class="product-price" colspan="2">Tổng tiền :   </td>
+                                        <td class="product-price" colspan="2" id="tongtien">{{tongtien()}}</td>
+                                        <input type="hidden" name = "tongtien" value="{{tongtien()}}"></input>
+                                        </tr>
+                              </table>
+                         </div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div style="width: 90%;margin:0cm 5cm 1cm 5cm;  ">
+<h2> Xác nhận mua hàng </h2>
+<form action="sentDonhang.html" method="post">
+    <label>Tên người mua hàng : </label><input type="text" name= "tenNgmua"></input><br/>
+    <label>Địa chỉ người mua hàng :</label> <input type="text" name = "dcNgmua"></input><br/>
+    <label>Email người mua hàng : </label> <input type="text" name  = "emailNgmua"></input><br/>
+    <label>Số điện thoại : </label> <input type="text" name ="sdtNgmua"></input><br/>
+    <label>Tổng tiền :</label> <input type="text" name = "tongtien" value = "{{tongtien()}}"></input><br/>
+    <input type="submit" value = "Submit"></input><br/>
+</form>
+</div>
+
+
+
+
+
+    <div ng-include="'pages/Footer.html'">  </div>
+
+    </div>
+<script>
+var ungdungAngularjs = angular.module("ungdungAngularJS", []);
+
+ungdungAngularjs.controller("cartController",function($scope){
+    $scope.listsanpham = [{
+    id:1,
+    ten:"5cm tren giay",
+    gia:20000,
+    img : "5_centimet_tren_giay.jpg",
+    soluong : 1,},
+   {
+    id:2,
+    ten:"1cm tren giay",
+    gia:10000,
+    img : "5_centimet_tren_giay.jpg",
+    soluong : 1,},
+    {
+    id:3,
+    ten:"15cm tren giay",
+    gia:50000,
+    img : "5_centimet_tren_giay.jpg",
+    soluong : 1,}];
+$scope.editedItem = {};
+
+    Array.prototype.removeValue = function(name, value){
+           var array = $.map(this, function(v,i){
+              return v[name] === value ? null : v;
+           });
+           this.length = 0; //clear original array
+           this.push.apply(this, array); //push all elements except the one we want to delete
+        }
+    $scope.xoaSP = function(vkey)
+    {
+        $scope.listsanpham.removeValue('id',vkey);
+    }
+    $scope.tongtien = function()
+    {
+        var tongtienS=0;
+        var x;
+        var lsp;
+        lsp = $scope.listsanpham;
+        for (x in lsp)
+        {
+            if(lsp[x].gia!==undefined && lsp[x].soluong!== undefined)
+            tongtienS += lsp[x].gia * lsp[x].soluong;
+        }
+        return tongtienS;
+    }
+});  
+
+
+</script>
+
+<!-- Latest jQuery form server -->
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+
+    <!-- Bootstrap JS form CDN -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <!-- jQuery sticky menu -->
+    <script src="Scripts/js/owl.carousel.min.js"></script>
+    <script src="Scripts/js/jquery.sticky.js"></script>
+
+    <!-- jQuery easing -->
+    <script src="Scripts/js/jquery.easing.1.3.min.js"></script>
+
+    <!-- Main Script -->
+    <script src="Scripts/js/main.js"></script>
+
+    <!-- Slider -->
+    <script type="text/javascript" src="Scripts/js/bxslider.min.js"></script>
+    <script type="text/javascript" src="Scripts/js/script.slider.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            // Cuộn trang lên với scrollTop
+            $('#go_top').click(function () {
+                $('body,html').animate({ scrollTop: 0 }, 400);
+                return false;
+            })
+        });
+        $(window).scroll(function () {
+            if ($(window).scrollTop() == 0) {
+                $('#go_top').stop(false, true).fadeOut(400);
+            } else {
+                $('#go_top').stop(false, true).fadeIn(400);
+            }
+        });
+    </script>
+</body>
+</html>
+	

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%- @title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.js"></script>
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.css" />
+    <script src="//cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+    
+  </head>
+    <body>
+      
+        <nav class="navbar bg-faded navbar-fixed-top">
+
+          <% if @session.isLoggedIn :%>
+            <!-- <a class="navbar-brand" href="/user/message" >Chat Message</a> -->
+
+          <% else : %>
+            
+
+          <% end%>
+
+            <ul class="nav navbar-nav pull-xs-right" >
+
+            <% if @session.isLoggedIn :%>
+             <li class="nav-item">
+                     
+              <%else :%>
+
+                <% include '../app/views/Header/header.ect' %>
+               
+              <%end%>
+            </ul>
+        </nav>  
+
+        <% include '../app/views/pages/MainMenu.ect' %>
+
+        <% content %>
+
+        
+    </body>
+</html>

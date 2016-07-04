@@ -1,0 +1,47 @@
+<% extend '../app/views/layouts/main' %>
+
+	<div class="login">
+		<div class="login-screen">
+		<form  method="post" action="/user/login" enctype='application/x-www-form-urlencoded'>
+			<div class="app-title">
+				<h1>Login</h1>
+			</div>
+			
+				<% if - @invalid:%>
+					<p> Login fail!</p>
+					<div class="login-form" >
+
+					<div class="control-group">
+					<input type="text" class="login-field" placeholder="Email" name="email">
+					<label class="login-field-icon fui-user" for="login-name"></label>
+					</div>
+
+					<div class="control-group">
+					<input type="password" class="login-field"  placeholder="Password" name="pass">
+					<label class="login-field-icon fui-lock" for="login-pass"></label>
+					</div>
+					<a ><input class="btnlogin btn-primary btn-large btn-block"  type="submit" value="Login"></a>
+					<a class="login-link" href="#">Lost your password?</a>
+				</div>
+				<%else :%>
+
+				<div class="login-form" >
+
+					<div class="control-group">
+					<input type="text" class="login-field" placeholder="Email" name="email">
+					<label class="login-field-icon fui-user" for="login-name"></label>
+					</div>
+
+					<div class="control-group">
+					<input type="password" class="login-field"  placeholder="Password" name="pass">
+					<label class="login-field-icon fui-lock" for="login-pass"></label>
+					</div>
+					<a ><input class="btnlogin btn-primary btn-large btn-block"  type="submit" value="Login"></a>
+					<a class="login-link" href="#">Lost your password?</a>
+					
+				</div>
+				<%end%>
+		</form>	
+		</div>
+
+	</div>

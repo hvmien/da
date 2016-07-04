@@ -1,0 +1,25 @@
+{
+  "name": "dack",
+  "version": "1.0.0",
+  "description": "this is my project",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hvmien/da.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hvmien/da/issues"
+  },
+  "homepage": "https://github.com/hvmien/da#readme",
+  "dependencies": {
+    "bower": "^1.7.9",
+    "express": "^4.14.0",
+    "mongoose": "^4.5.2",
+    "open": "0.0.5"
+  }
+}
